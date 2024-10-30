@@ -28,7 +28,7 @@ jobs:
             workflow: wheels.yml
             name: sdk_whl
     - name: Uzip 
-      run: unzip sdk_whl -d sdk_whl
+      run: unzip sdk_whl.zip -d sdk_whl
     - name: Install Twine
       run: pip install twine
     - name: Upload package to PyPI
