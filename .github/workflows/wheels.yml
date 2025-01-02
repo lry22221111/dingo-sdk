@@ -9,14 +9,16 @@ on:
 
 jobs:
   build_wheels:
-    name: Build wheels on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
+    runs-on: ubuntu-latest
+    container: dingodatabase/dingo-eureka:rocky9
  
     steps:
       - uses: actions/checkout@v4
+      - name: Set Safe Dir
+        run: git config --global --add safe.directory $PWD
+      - name: Install default Python version
+        run: |
+          dnf install -y python3 python3-devel python3-venv
       - name: Download the submodule
         run: |
           git submodule sync --recursive
